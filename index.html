@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi Niña Hermosa ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#1d0b33; --wine:#4a1555; --rose:#ff7a9c; --ember:#e5593a; --amber:#ffb86b; --gold:#ffd66b;
+  --cream:#fff1dc; --card:rgba(34,10,44,.58); --line:rgba(255,200,140,.28);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.2rem;color:var(--cream);background:var(--plum);min-height:100vh;overflow-x:hidden}
+.script{font-family:'Great Vibes',cursive;font-weight:400}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:2}
+section{width:100%;max-width:960px;margin:0 auto;padding:0 1.25rem}
+
+/* texto que se escribe: el texto restante ocupa lugar pero no se ve */
+.off{opacity:0}
+.typing .on::after{content:'';display:inline-block;width:2px;height:1em;margin-left:2px;vertical-align:-.12em;background:var(--gold);animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* portada */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.5rem}
+.hero h1{font-size:clamp(2.8rem,10vw,6rem);line-height:1.1;color:var(--cream);text-shadow:0 2px 24px rgba(229,89,58,.55),0 0 2px rgba(0,0,0,.5)}
+.heart{display:inline-block;color:var(--rose);opacity:0;transition:opacity 1s}
+.heart.show{opacity:1;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.hero p{max-width:34rem;font-size:clamp(1.15rem,3.6vw,1.5rem);line-height:1.6;font-style:italic;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.scroll-hint{position:absolute;bottom:2rem;font-size:.95rem;opacity:0;transition:opacity 1.5s;color:var(--gold)}
+.scroll-hint.show{opacity:.9}
+
+/* tarjetas */
+.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:1.5rem;box-shadow:0 10px 40px rgba(10,0,20,.45)}
+.counters{display:grid;gap:1.5rem;grid-template-columns:1fr;padding-bottom:6rem}
+@media(min-width:768px){.counters{grid-template-columns:1fr 1fr}}
+.counter{padding:2rem 1.5rem;text-align:center}
+.counter h2{font-size:1.9rem;font-weight:600;color:var(--gold);margin-bottom:1.5rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.num{background:rgba(255,184,107,.10);border:1px solid var(--line);border-radius:1rem;padding:.7rem 0;font-size:clamp(1.7rem,6vw,2.4rem);font-weight:600;color:var(--cream);animation:pop .9s cubic-bezier(.28,.84,.42,1) both}
+.small .num{font-size:clamp(1.3rem,4.5vw,1.7rem);padding:.5rem 0}
+.lab{display:block;margin-top:.4rem;font-size:.85rem;letter-spacing:.06em;color:var(--amber)}
+.months{display:inline-block;min-width:9rem;margin-bottom:1.25rem;padding:.6rem 2rem}
+.months b{font-size:3.2rem;line-height:1;display:block}
+.nextlabel{font-size:1rem;margin-bottom:.6rem;font-style:italic;opacity:.9}
+@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+
+/* galería de una en una */
+.gallery{text-align:center;padding-bottom:6rem}
+.gallery h2{font-size:clamp(2.6rem,9vw,4rem);color:var(--cream);text-shadow:0 2px 20px rgba(229,89,58,.5);margin-bottom:2rem;min-height:1.2em}
+.frame{position:relative;width:min(86vw,400px);margin:0 auto;padding:14px 14px 56px;background:rgba(255,241,220,.92);border-radius:6px;transform:rotate(-2deg);box-shadow:0 24px 50px rgba(10,0,20,.6);transition:transform .6s}
+.frame:hover{transform:rotate(0)}
+.frame::before{content:'';position:absolute;top:-14px;left:50%;width:84px;height:26px;transform:translateX(-50%) rotate(2deg);background:rgba(255,184,107,.55);border:1px solid rgba(255,255,255,.35)}
+.frame img{display:block;width:100%;aspect-ratio:4/5;object-fit:contain;object-position:center;background:#2a1030;transition:opacity .5s ease}
+.frame .count{position:absolute;bottom:16px;left:0;right:0;color:#4a1555;font-size:1.15rem;font-style:italic}
+.controls{display:flex;align-items:center;justify-content:center;gap:1.25rem;margin-top:2.25rem}
+.controls button{width:3rem;height:3rem;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--gold);font-size:1.4rem;cursor:pointer;transition:transform .2s,background .2s}
+.controls button:hover{transform:scale(1.12);background:rgba(229,89,58,.45)}
+.dots{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center;max-width:14rem}
+.dots i{width:.55rem;height:.55rem;border-radius:50%;background:rgba(255,241,220,.3);transition:all .3s;cursor:pointer}
+.dots i.on{background:var(--gold);transform:scale(1.35)}
+
+.closing{text-align:center;padding:3rem 1.5rem;margin-bottom:8rem}
+.closing p{font-size:clamp(2.2rem,8vw,3.6rem);color:var(--cream);text-shadow:0 2px 20px rgba(229,89,58,.5)}
+
+/* botón de música */
+#music{position:fixed;right:1.25rem;bottom:1.25rem;z-index:50;display:flex;align-items:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:999px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--cream);font:600 1rem 'Cormorant Garamond',serif;cursor:pointer;transition:transform .2s}
+#music:hover{transform:scale(1.07)}
+
+@media(max-width:480px){
+  section{padding-inline:1rem}
+  .hero{gap:1rem;padding:4rem 0 5rem}
+  .hero h1{font-size:clamp(2.2rem,10vw,3.2rem);line-height:1.08}
+  .hero p{max-width:31rem;font-size:clamp(1.05rem,4.4vw,1.3rem);line-height:1.45}
+  .scroll-hint{position:static;margin-top:.25rem}
+  .counters{gap:1rem;padding-bottom:4rem}
+  .counter{padding:1.35rem .9rem}
+  .counter h2{font-size:clamp(1.45rem,6.5vw,1.8rem);line-height:1.15;margin-bottom:1rem}
+  .grid4{gap:.3rem}
+  .num{min-width:0;padding:.55rem .1rem;font-size:clamp(1rem,5.8vw,1.45rem);border-radius:.7rem;font-variant-numeric:tabular-nums}
+  .small .num{font-size:clamp(.95rem,5vw,1.25rem);padding:.45rem .1rem}
+  .lab{font-size:.72rem;letter-spacing:.02em}
+  .months{min-width:0;margin-bottom:1rem;padding:.5rem 1.5rem}
+  .months b{font-size:2.7rem}
+  .nextlabel{font-size:.95rem}
+  .gallery{padding-bottom:4rem}
+  .gallery h2{font-size:clamp(2.5rem,11vw,3.4rem);margin-bottom:1.4rem}
+  .frame{width:min(100%,400px);padding:10px 10px 48px;transform:none}
+  .frame:hover{transform:none}
+  .frame img{aspect-ratio:4/5}
+  .frame .count{bottom:12px}
+  .controls{gap:.35rem;margin-top:1.5rem}
+  .controls button{flex:0 0 2.75rem;width:2.75rem;height:2.75rem}
+  .dots{gap:.1rem;max-width:calc(100vw - 8rem)}
+  .dots i{width:1.45rem;height:2.75rem;display:grid;place-items:center}
+  .dots i::before{content:'';width:.48rem;height:.48rem;border-radius:50%;background:rgba(255,241,220,.3);transition:all .3s}
+  .dots i.on{background:transparent;transform:none}
+  .dots i.on::before{background:var(--gold);transform:scale(1.3)}
+  .closing{padding:2rem .75rem;margin-bottom:5rem}
+  .closing p{font-size:clamp(2rem,9vw,2.8rem)}
+  #music{right:max(.75rem,env(safe-area-inset-right));bottom:max(.75rem,env(safe-area-inset-bottom));max-width:calc(100vw - 1.5rem);padding:.65rem .9rem}
+  #mt{max-width:calc(100vw - 6.5rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<audio id="song" loop preload="auto"><source src="./my_kind_of_woman.mp3" type="audio/mpeg"></audio>
+
+<button id="music" aria-label="Pausar o reproducir música"><span id="mi">♪</span><span id="mt">Pausar</span></button>
+
+<main>
+  <section class="hero">
+    <h1 class="script"><span data-type data-speed="70">Para el amor de mi vida</span> <span class="heart" id="hh">❤</span></h1>
+    <p data-type data-speed="38">Cada segundo a tu lado es un regalo. Hice esta página solo para nosotros para recordar siempre lo nuestro, te amo.</p>
+    <span class="scroll-hint" id="hint">desliza hacia abajo ↓</span>
+  </section>
+
+  <section class="counters">
+    <div class="card counter">
+      <h2 data-type data-scroll>Nos conocemos desde</h2>
+      <div class="grid4">
+        <div><div class="num" id="met-d">0</div><span class="lab">Días</span></div>
+        <div><div class="num" id="met-h" style="animation-delay:.1s">0</div><span class="lab">Horas</span></div>
+        <div><div class="num" id="met-m" style="animation-delay:.2s">0</div><span class="lab">Min</span></div>
+        <div><div class="num" id="met-s" style="animation-delay:.3s">0</div><span class="lab">Seg</span></div>
+      </div>
+    </div>
+
+    <div class="card counter small">
+      <h2 data-type data-scroll>Somos una parejita desde</h2>
+      <div class="num months"><b id="date-mo">0</b><span class="lab" id="date-mo-label">Meses</span></div>
+      <p class="nextlabel">Faltan para el próximo mes:</p>
+      <div class="grid4">
+        <div><div class="num" id="date-d">0</div><span class="lab">Días</span></div>
+        <div><div class="num" id="date-h" style="animation-delay:.1s">0</div><span class="lab">Horas</span></div>
+        <div><div class="num" id="date-m" style="animation-delay:.2s">0</div><span class="lab">Min</span></div>
+        <div><div class="num" id="date-s" style="animation-delay:.3s">0</div><span class="lab">Seg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <h2 class="script" data-type data-scroll>Mi princesa</h2>
+    <div class="frame" id="frame"><img id="slide" alt="Recuerdo de amor"><div class="count" id="count"></div></div>
+    <div class="controls">
+      <button id="prev" aria-label="Foto anterior">‹</button>
+      <div class="dots" id="dots"></div>
+      <button id="next" aria-label="Foto siguiente">›</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="card closing"><p class="script" data-type data-scroll data-speed="80">Te elijo hoy y siempre ✨</p></div>
+  </section>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- MÁQUINA DE ESCRIBIR ---------- */
+function prepare(el){
+  const full = el.textContent.trim();
+  el.dataset.full = full;
+  el.textContent = '';
+  const on = document.createElement('span'); on.className = 'on';
+  const off = document.createElement('span'); off.className = 'off'; off.textContent = full;
+  el.append(on, off);
+}
+function typeEl(el){
+  return new Promise(done => {
+    if(el.dataset.typed) return done();
+    el.dataset.typed = '1';
+    const full = el.dataset.full, on = el.firstChild, off = el.lastChild;
+    const speed = +el.dataset.speed || 45;
+    if(reduce){ on.textContent = full; off.textContent = ''; return done(); }
+    let i = 0; el.classList.add('typing');
+    (function step(){
+      i++; on.textContent = full.slice(0,i); off.textContent = full.slice(i);
+      if(i < full.length){
+        const c = full[i-1];
+        setTimeout(step, speed + (/[,.]/.test(c) ? 260 : 0) + Math.random()*20);
+      } else { el.classList.remove('typing'); done(); }
+    })();
+  });
+}
+document.querySelectorAll('[data-type]').forEach(prepare);
+
+/* ---------- MÚSICA Y ENTRADA ---------- */
+const song = $('#song'), mt = $('#mt'), mi = $('#mi');
+function setMusicUI(p){ mt.textContent = p ? 'Pausar' : 'Dale play'; mi.textContent = p ? '♪' : '▶'; }
+function toggleMusic(){
+  if(song.paused){ userPaused = false; unlocked = true; song.volume = 1; song.play().then(()=>setMusicUI(true)).catch(()=>{}); }
+  else { song.pause(); userPaused = true; setMusicUI(false); }
+}
+$('#music').addEventListener('click', toggleMusic);
+song.querySelector('source').addEventListener('error', () => {
+  mt.textContent = 'Falta my_kind_of_woman.mp3'; mi.textContent = '⚠';
+  console.error('No se encontró my_kind_of_woman.mp3 junto a esta página.');
+});
+
+let userPaused = false, unlocked = false;
+function fadeIn(){ let v = 0; const f = setInterval(() => { v = Math.min(1, v + .05); song.volume = v; if(v >= 1) clearInterval(f); }, 120); }
+function tryPlay(){
+  if(unlocked || userPaused) return;
+  song.volume = 0;
+  song.play().then(() => { unlocked = true; setMusicUI(true); fadeIn(); removeUnlock(); }).catch(() => {});
+}
+// Si el navegador bloquea el audio automático, arranca con el primer toque o tecla
+const unlockEvents = ['pointerdown','touchend','click','keydown'];
+function onFirstGesture(e){ if(e.target.closest && e.target.closest('#music')) return; tryPlay(); }
+function removeUnlock(){ unlockEvents.forEach(ev => removeEventListener(ev, onFirstGesture, true)); }
+unlockEvents.forEach(ev => addEventListener(ev, onFirstGesture, true));
+tryPlay();
+
+async function intro(){
+  await new Promise(r => setTimeout(r, reduce ? 0 : 600));
+  const hero = [...document.querySelectorAll('.hero [data-type]')];
+  await typeEl(hero[0]);
+  $('#hh').classList.add('show');
+  await typeEl(hero[1]);
+  $('#hint').classList.add('show');
+  startScrollTyping();
+}
+intro();
+setMusicUI(false);
+
+function startScrollTyping(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      io.unobserve(e.target);
+      setTimeout(() => typeEl(e.target), +e.target.dataset.delay || 0);
+    });
+  }, { threshold: .6 });
+  document.querySelectorAll('[data-scroll]').forEach(el => io.observe(el));
+}
+
+/* ---------- GALERÍA: UNA FOTO A LA VEZ ---------- */
+const files = [
+  'Captura de pantalla 2026-11-01 220333.png',
+  'WhatsApp Image 2026-11-01 at 9.44.00 PM.jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.01 PM.jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.01 PM (1).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.01 PM (2).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.01 PM (3).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.02 PM (1).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.02 PM (3).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.02 PM.jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.03 PM (1).jpeg',
+  'WhatsApp Image 2026-11-01 at 9.44.03 PM.jpeg'
+];
+const fallback = 'https://placehold.co/600x750/4a1555/ffd66b?text=Amor';
+const src = i => './imagenes/' + encodeURIComponent(files[i]);
+const slide = $('#slide'), dots = $('#dots');
+let idx = 0, auto;
+
+files.forEach((_, i) => {
+  const d = document.createElement('i'); d.onclick = () => { go(i); restart(); }; dots.appendChild(d);
+});
+function go(i){
+  idx = (i + files.length) % files.length;
+  slide.style.opacity = 0;
+  setTimeout(() => {
+    slide.dataset.fb = '';
+    slide.src = src(idx);
+  }, reduce ? 0 : 450);
+  [...dots.children].forEach((d, k) => d.classList.toggle('on', k === idx));
+  $('#count').textContent = (idx + 1) + ' / ' + files.length;
+  new Image().src = src((idx + 1) % files.length); // precarga la siguiente
+}
+slide.onload = () => { slide.style.opacity = 1; };
+slide.onerror = () => { if(!slide.dataset.fb){ slide.dataset.fb = '1'; slide.src = fallback; } };
+function restart(){ clearInterval(auto); auto = setInterval(() => go(idx + 1), 6000); }
+$('#next').onclick = () => { go(idx + 1); restart(); };
+$('#prev').onclick = () => { go(idx - 1); restart(); };
+let tx = 0;
+$('#frame').addEventListener('touchstart', e => { tx = e.touches[0].clientX; clearInterval(auto); }, { passive: true });
+$('#frame').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if(Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+  restart();
+}, { passive: true });
+go(0); restart();
+
+/* ---------- CONTADORES ---------- */
+const dateMet = new Date('2025-09-06T00:00:00');
+const dateDating = new Date('2026-09-20T00:00:00');
+const set = (id, v) => { document.getElementById(id).textContent = v; };
+function parts(ms){
+  return [Math.floor(ms/864e5), Math.floor(ms/36e5)%24, Math.floor(ms/6e4)%60, Math.floor(ms/1e3)%60];
+}
+function updateCounters(){
+  const now = new Date();
+  const [md, mh, mm, ms] = parts(now - dateMet);
+  set('met-d', md); set('met-h', mh); set('met-m', mm); set('met-s', ms);
+
+  let months = (now.getFullYear() - dateDating.getFullYear()) * 12 + (now.getMonth() - dateDating.getMonth());
+  if(now.getDate() < dateDating.getDate() || (now.getDate() === dateDating.getDate() && now.getHours() < dateDating.getHours())) months--;
+  months = Math.max(0, months);
+  set('date-mo', months);
+  set('date-mo-label', months === 1 ? 'Mes' : 'Meses');
+
+  const next = new Date(now.getFullYear(), now.getMonth(), 20);
+  if(now >= next) next.setMonth(next.getMonth() + 1);
+  const [d, h, m, s] = parts(next - now);
+  set('date-d', d); set('date-h', h); set('date-m', m); set('date-s', s);
+}
+setInterval(updateCounters, 1000); updateCounters();
+
+/* ---------- FONDO: ATARDECER, GATOS Y CORAZONES ---------- */
+const cv = $('#bg'), ctx = cv.getContext('2d');
+let W, H, sky, stars = [], hearts = [], comets = [], nextCometAt = 0;
+function resize(){
+  W = cv.width = innerWidth; H = cv.height = innerHeight;
+  sky = ctx.createLinearGradient(0, 0, 0, H);
+  [[0,'#1d0b33'],[.25,'#4a1555'],[.5,'#a3284a'],[.7,'#e5593a'],[.88,'#fb9b3a'],[1,'#ffd66b']].forEach(([p,c]) => sky.addColorStop(p, c));
+  stars = Array.from({length:130}, (_, i) => ({
+    x:Math.random()*W,
+    y:Math.random()*H*.55,
+    r:i < 9 ? Math.random()*1.5+1.8 : Math.random()*1.1+.2,
+    a:Math.random()*.7,
+    f:Math.random()*.02+.004,
+    large:i < 9
+  }));
+}
+addEventListener('resize', resize); resize();
+
+function heart(x, y, s, a){
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.globalAlpha = a; ctx.fillStyle = '#ff7a9c';
+  ctx.beginPath(); ctx.moveTo(0,0);
+  ctx.bezierCurveTo(0,-3,-5,-15,-15,-15); ctx.bezierCurveTo(-25,-15,-25,-2.5,-25,-2.5);
+  ctx.bezierCurveTo(-25,9,-5,21,0,30); ctx.bezierCurveTo(5,21,25,9,25,-2.5);
+  ctx.bezierCurveTo(25,-2.5,25,-15,15,-15); ctx.bezierCurveTo(5,-15,0,-3,0,0);
+  ctx.fill(); ctx.restore();
+}
+function drawCat(x, y, scale, facing){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale * facing, scale);
+  ctx.fillStyle = '#100615';
+  ctx.shadowColor = 'rgba(10,0,20,.75)';
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.ellipse(0, -18, 13, 21, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.moveTo(-10,-46);
+  ctx.lineTo(-13,-61); ctx.quadraticCurveTo(-13,-64,-10,-61);
+  ctx.lineTo(-3,-54); ctx.quadraticCurveTo(1,-56,5,-53);
+  ctx.lineTo(12,-62); ctx.quadraticCurveTo(15,-64,14,-60);
+  ctx.lineTo(11,-45);
+  ctx.quadraticCurveTo(11,-34,0,-34);
+  ctx.quadraticCurveTo(-11,-34,-10,-46);
+  ctx.fill();
+  ctx.strokeStyle = '#100615';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-9,-5);
+  ctx.bezierCurveTo(-27,-3,-29,-22,-21,-25);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,184,107,.42)';
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(-9,-43);
+  ctx.quadraticCurveTo(-7,-52,-3,-53);
+  ctx.moveTo(7,-53);
+  ctx.lineTo(12,-59);
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(255,214,107,.8)';
+  ctx.beginPath(); ctx.arc(7,-46,1.1,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+function cats(cx, cy){
+  const ground = ctx.createRadialGradient(cx, cy, 3, cx, cy, 60);
+  ground.addColorStop(0, 'rgba(8,2,14,.62)');
+  ground.addColorStop(1, 'rgba(8,2,14,0)');
+  ctx.fillStyle = ground;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, 60, 12, 0, 0, Math.PI * 2);
+  ctx.fill();
+  drawCat(cx - 24, cy, .9, 1);
+  drawCat(cx + 24, cy + 2, .82, -1);
+}
+function frame(t){
+  ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+
+  ctx.fillStyle = '#fff'; 
+  stars.forEach(s => {
+    s.a += s.f; if(s.a > .7 || s.a < 0) s.f *= -1;
+    ctx.globalAlpha = Math.max(0, s.a);
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+    if(s.large){
+      ctx.globalAlpha = Math.max(0, s.a * .45);
+      ctx.beginPath();
+      ctx.moveTo(s.x - s.r * 2.2, s.y); ctx.lineTo(s.x + s.r * 2.2, s.y);
+      ctx.moveTo(s.x, s.y - s.r * 2.2); ctx.lineTo(s.x, s.y + s.r * 2.2);
+      ctx.strokeStyle = '#fff3d6'; ctx.lineWidth = .7; ctx.stroke();
+    }
+  });
+  ctx.globalAlpha = 1;
+
+  if(!reduce && t >= nextCometAt){
+    const waveSize = 2 + Math.floor(Math.random() * 2);
+    for(let n = 0; n < waveSize && comets.length < 10; n++){
+      comets.push({
+        x: W * (.15 + Math.random() * .9),
+        y: H * (.03 + Math.random() * .32),
+        vx: -3 - Math.random() * 4,
+        vy: 1 + Math.random() * 2.5,
+        length: 40 + Math.random() * 75,
+        life: 0,
+        maxLife: 75 + Math.random() * 55
+      });
+    }
+    nextCometAt = t + 650 + Math.random() * 750;
+  }
+  for(let i = comets.length - 1; i >= 0; i--){
+    const c = comets[i];
+    c.x += c.vx; c.y += c.vy; c.life++;
+    const opacity = Math.max(0, Math.sin(Math.PI * c.life / c.maxLife));
+    const trail = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * c.length / 8, c.y - c.vy * c.length / 8);
+    trail.addColorStop(0, `rgba(255,243,214,${opacity})`);
+    trail.addColorStop(1, 'rgba(255,184,107,0)');
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.strokeStyle = trail;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#ffd66b';
+    ctx.beginPath();
+    ctx.moveTo(c.x, c.y);
+    ctx.lineTo(c.x - c.vx * c.length / 8, c.y - c.vy * c.length / 8);
+    ctx.stroke();
+    ctx.restore();
+    if(c.life >= c.maxLife) comets.splice(i, 1);
+  }
+
+  // Sol elevado con halo cálido y brillo pulsante.
+  const sunX = W * .5, sunY = H * .46;
+  const pulse = 1 + Math.sin(t / 1800) * .045;
+  const halo = ctx.createRadialGradient(sunX, sunY, 20, sunX, sunY, 190 * pulse);
+  halo.addColorStop(0, 'rgba(255,243,214,.34)');
+  halo.addColorStop(.35, 'rgba(255,184,107,.18)');
+  halo.addColorStop(1, 'rgba(255,122,82,0)');
+  ctx.fillStyle = halo;
+  ctx.fillRect(sunX - 200, sunY - 200, 400, 400);
+  const sun = ctx.createRadialGradient(sunX - 22, sunY - 25, 5, sunX, sunY, 76 * pulse);
+  sun.addColorStop(0, '#fffdf0');
+  sun.addColorStop(.62, '#fff1cf');
+  sun.addColorStop(1, '#ffb86b');
+  ctx.save();
+  ctx.shadowBlur = 52 * pulse;
+  ctx.shadowColor = '#ffb86b';
+  ctx.fillStyle = sun;
+  ctx.beginPath(); ctx.arc(sunX, sunY, 60 * pulse, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+
+  const farHills = ctx.createLinearGradient(0, H - 300, 0, H);
+  farHills.addColorStop(0, '#612447');
+  farHills.addColorStop(1, '#32112f');
+  ctx.fillStyle = farHills;
+  ctx.beginPath(); ctx.moveTo(0,H); ctx.lineTo(0,H-150);
+  ctx.quadraticCurveTo(W*.3,H-300,W*.7,H-150); ctx.quadraticCurveTo(W*.9,H-100,W,H-250); ctx.lineTo(W,H); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,184,107,.24)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0,H-150);
+  ctx.quadraticCurveTo(W*.3,H-300,W*.7,H-150);
+  ctx.quadraticCurveTo(W*.9,H-100,W,H-250); ctx.stroke();
+  const nearHills = ctx.createLinearGradient(0, H - 130, 0, H);
+  nearHills.addColorStop(0, '#281022');
+  nearHills.addColorStop(1, '#100711');
+  ctx.fillStyle = nearHills;
+  ctx.beginPath(); ctx.moveTo(0,H); ctx.lineTo(0,H-50);
+  ctx.quadraticCurveTo(W*.2,H-100,W*.5,H-120); ctx.quadraticCurveTo(W*.8,H-130,W,H-80); ctx.lineTo(W,H); ctx.fill();
+
+  const cx = W*.5, cy = H - (W < 768 ? 110 : 120);
+  cats(cx, cy);
+
+  if(Math.random() < .04) hearts.push({x:cx+Math.random()*40-20, y:cy-40, s:Math.random()*.2+.15, vy:Math.random()*1.5+.5, vx:(Math.random()-.5)*.5, a:1});
+  for(let i = hearts.length-1; i >= 0; i--){
+    const h = hearts[i]; h.y -= h.vy; h.x += h.vx; h.a -= .003;
+    if(h.a <= 0) hearts.splice(i,1); else heart(h.x, h.y, h.s, h.a);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
